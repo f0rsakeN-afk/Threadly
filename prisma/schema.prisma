@@ -15,9 +15,11 @@ datasource db {
 }
 
 model User {
-  userId    String   @id @default(cuid())
-  email     String   @unique
-  username  String   @unique
-  password  String
-  createdAt DateTime @default(now())
+  userId                   String    @id @default(cuid())
+  email                    String    @unique
+  username                 String    @unique
+  password                 String
+  passwordResetToken       String?
+  passwordResetTokenExpiry DateTime?
+  createdAt                DateTime  @default(now())
 }
