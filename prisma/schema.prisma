@@ -15,11 +15,37 @@ datasource db {
 }
 
 model User {
-  userId                   String    @id @default(cuid())
-  email                    String    @unique
-  username                 String    @unique
+  userId                   String      @id @default(cuid())
+  email                    String      @unique
+  username                 String      @unique
   password                 String
   passwordResetToken       String?
   passwordResetTokenExpiry DateTime?
-  createdAt                DateTime  @default(now())
+  createdAt                DateTime    @default(now())
+  subreddits               Subreddit[]
+  posts                    Post[]
+}
+
+model Subreddit {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+
+  creator   User   @relation(fields: [creatorId], references: [userId])
+  creatorId String
+  posts     Post[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  createdAt DateTime @default(now())
+
+  author   User   @relation(fields: [authorId], references: [userId])
+  authorId String
+
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subredditId String
 }
