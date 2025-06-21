@@ -46,6 +46,6 @@ model Post {
   author   User   @relation(fields: [authorId], references: [userId])
   authorId String
 
-  subreddit   Subreddit @relation(fields: [subredditId], references: [id])
+  subreddit   Subreddit @relation(fields: [subredditId], references: [id], onDelete: Cascade)
   subredditId String
 }
