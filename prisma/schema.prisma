@@ -24,6 +24,8 @@ model User {
   createdAt                DateTime    @default(now())
   subreddits               Subreddit[]
   posts                    Post[]
+  votes                    Vote[]
+  comments                 Comment[]
 }
 
 model Subreddit {
@@ -48,4 +50,36 @@ model Post {
 
   subreddit   Subreddit @relation(fields: [subredditId], references: [id], onDelete: Cascade)
   subredditId String
+  votes       Vote[]
+  comments    Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String
+
+  author   User   @relation(fields: [authorId], references: [userId])
+  authorId String
+
+  parent   Comment?  @relation("CommentToComment", fields: [parentId], references: [id])
+  parentId String?
+  replies  Comment[] @relation("CommentToComment")
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  value     Int
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [userId])
+  userId String
+
+  post   Post   @relation(fields: [postId], references: [id])
+  postId String
+
+  @@unique([userId, postId])
 }
