@@ -8,6 +8,7 @@ export const isSubredditCreator = async (
   next: NextFunction
 ) => {
   const { id } = req.params;
+/*   console.log(id) */
   const subreddit = await prisma.subreddit.findUnique({ where: { id } });
 
   if (!subreddit || subreddit.creatorId !== req.userId)

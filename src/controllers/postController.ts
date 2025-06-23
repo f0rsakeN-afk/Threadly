@@ -30,6 +30,33 @@ export const createPost = async (req: AuthRequest, res: Response) => {
   });
 };
 
+export const updatePost = async (req: AuthRequest, res: Response) => {
+  const { title, content } = req.body;
+  try {
+    const post = await prisma.post.update({
+      where: { id: req.params.id },
+      data: { title, content },
+    });
+    res.status(200).json({
+      message: "Post updated successfully",
+      data: post,
+    });
+  } catch (error) {
+    res.status(400).json({ error: "Failed to update post" });
+  }
+};
+
+export const deletePost = async (req: AuthRequest, res: Response) => {
+  try {
+    await prisma.post.delete({ where: { id: req.params.id } });
+    res.status(200).json({
+      message: "Post deleted successfully",
+    });
+  } catch (error) {
+    res.status(400).json({ error: "Post deletion failed" });
+  }
+};
+
 export const getPostsBySubreddit = async (req: Request, res: Response) => {
   const { slug } = req.params;
 
@@ -48,6 +75,7 @@ export const getPostsBySubreddit = async (req: Request, res: Response) => {
   if (!subreddit) return res.status(404).json({ error: "Subreddit not found" });
 
   res.status(200).json({
+    results: subreddit.posts.length,
     data: subreddit,
   });
 };
