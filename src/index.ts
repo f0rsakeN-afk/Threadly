@@ -15,7 +15,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/subreddits", subRedditRoutes);
 app.use("/api/posts", postRoutes);
-app.use("/api/comment/", commentRoutes);
+app.use("/api/comments/", commentRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`🚀 Server running on http://localhost:${process.env.PORT}`);
