@@ -6,4 +6,8 @@ const commentSchema = z.object({
   parentId: z.string().optional(),
 });
 
-export default commentSchema;
+const updateCommentSchema = z.object({
+  content: z.string().min(1, "Comment cannot be empty"),
+});
+
+export { commentSchema, updateCommentSchema };
