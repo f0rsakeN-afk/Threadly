@@ -1,5 +1,5 @@
 import { AuthRequest } from "../middlewares/authMiddleware";
-import commentSchema from "../validators/comment";
+import { commentSchema, updateCommentSchema } from "../validators/comment";
 import { Response, Request } from "express";
 import prisma from "../lib/prisma";
 
@@ -50,4 +50,33 @@ export const getCommentsByPost = async (req: Request, res: Response) => {
   res.status(200).json({
     data: comments,
   });
+};
+
+export const updateComment = async (req: AuthRequest, res: Response) => {
+  const parsed = updateCommentSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.flatten().fieldErrors });
+  }
+
+  const { content } = parsed.data;
+
+  try {
+    const updated = await prisma.comment.update({
+      where: { id: req.params.id },
+      data: { content },
+    });
+
+    res.json(updated);
+  } catch {
+    res.status(500).json({ error: "Failed to update comment" });
+  }
+};
+
+export const deleteComment = async (req: AuthRequest, res: Response) => {
+  try {
+    await prisma.comment.delete({ where: { id: req.params.id } });
+    res.json({ message: "Comment deleted" });
+  } catch {
+    res.status(500).json({ error: "Failed to delete comment" });
+  }
 };
