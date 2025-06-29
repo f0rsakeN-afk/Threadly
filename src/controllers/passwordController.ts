@@ -3,10 +3,9 @@ import crypto from "crypto";
 import prisma from "../lib/prisma";
 import { hashPassword } from "../utils/hash";
 import { forgotPasswordSchema, resetPasswordSchema } from "../validators/auth";
+import { sendResetEmail } from "../utils/sendEmail";
 
-const sendEmail = (email: string, token: string) => {
-  console.log(`🔗 Reset Link: http://localhost:5173/reset-password/${token}`);
-};
+
 
 export const forgotPassword = async (req: Request, res: Response) => {
   const parsed = forgotPasswordSchema.safeParse(req.body);
@@ -28,7 +27,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
     data: { passwordResetToken: hashed, passwordResetTokenExpiry: expiry },
   });
 
-  sendEmail(email, resetToken);
+  sendResetEmail(email, resetToken);
   res.status(200).json({
     message: "Reset link sent",
   });

@@ -7,9 +7,12 @@ import postRoutes from "./routes/postRoutes";
 import subRedditRoutes from "./routes/subRedditRoutes";
 import commentRoutes from "./routes/commentRoutes";
 import voteRoutes from "./routes/voteRoutes";
+import cookieParser from "cookie-parser";
 import { globalRateLimiter } from "./middlewares/rateLimiter";
 
 const app = express();
+
+app.use(cookieParser());
 
 app.use(cors());
 app.use(express.json());
