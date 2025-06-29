@@ -1,5 +1,7 @@
 # Threadly
 
+![License](https://img.shields.io/badge/license-MIT-blue)
+
 Threadly is a backend application designed to mimic the functionality of Reddit. It provides APIs for user authentication, subreddit management, post creation, and comment handling.
 
 ## Table of Contents
@@ -14,6 +16,18 @@ Threadly is a backend application designed to mimic the functionality of Reddit.
 - [Technologies Used](#technologies-used)
 
 ---
+
+## Getting Started
+
+To get started with Threadly, follow these steps:
+
+1. Ensure you have Node.js and npm installed on your system.
+2. Clone the repository and navigate to the project directory.
+3. Install the dependencies using `npm install`.
+4. Set up the `.env` file with the required environment variables.
+5. Run the development server using `npm run dev`.
+
+For more details, refer to the [Installation](#installation) section.
 
 ## Features
 
@@ -60,6 +74,43 @@ Threadly is a backend application designed to mimic the functionality of Reddit.
    ```
 
 ---
+
+## License
+
+Threadly is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Folder Structure
+
+The project structure is organized as follows:
+
+```
+Threadly/
+├── dist/               # Compiled JavaScript files
+├── generated/          # Auto-generated files (e.g., Prisma client)
+├── node_modules/       # Dependencies
+├── prisma/             # Prisma schema and migrations
+├── src/                # Source code
+├── .gitignore          # Git ignore rules
+├── LICENSE             # License information
+├── README.md           # Project documentation
+├── package.json        # Project metadata and scripts
+├── tsconfig.json       # TypeScript configuration
+```
+
+This structure ensures a clean separation of concerns and easy navigation.
+
+---
+
+## Contributing
+
+We welcome contributions to Threadly! To contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes with clear and concise messages.
+4. Push your branch and create a pull request.
+
+Please ensure your code adheres to the project's coding standards and includes relevant tests.
 
 ## API Documentation
 
