@@ -12,12 +12,15 @@ export const protect = (
   res: Response,
   next: NextFunction
 ) => {
-  const authHeader = req.headers.authorization;
+  /*   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer"))
     return res.status(401).json({ error: "Unauthorized" });
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1]; */
+
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ message: "Not authenticated" });
 
   try {
     const decoded = verifyToken(token);
