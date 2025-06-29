@@ -43,7 +43,7 @@ export const isCommentOwner = async (
   const { id } = req.params;
 
   const comment = await prisma.comment.findUnique({ where: { id } });
-  if (!comment || !(comment.authorId !== req.userId))
+  if (!comment || comment.authorId !== req.userId)
     return res.status(403).json({
       error: "Not allowed to manage this comment",
     });
