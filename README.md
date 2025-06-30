@@ -75,6 +75,14 @@ For more details, refer to the [Installation](#installation) section.
 
 ---
 
+### Voting Routes
+
+| Method | Endpoint         | Description                       | Protected |
+|--------|------------------|-----------------------------------|-----------|
+| POST   | `/`              | Vote on a post (upvote/downvote) | Yes       |
+
+---
+
 ## License
 
 Threadly is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
